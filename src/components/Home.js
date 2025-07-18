@@ -5,13 +5,14 @@ function Home() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
     useEffect(() => {
-        fetch("http://localhost/Admin_LA/get_hero_image.php")
+        fetch('https://adminparshu.great-site.net/get_hero_image.php')
             .then(res => res.json())
             .then(data => {
                 if (data.image) {
-                    setHeroImage("http://localhost/Admin_LA/" + data.image);
+                    setHeroImage('https://adminparshu.great-site.net/' + data.image);
                 }
-            });
+            })
+            .catch(err => console.error('Error fetching hero image:', err));
     }, []);
 
     useEffect(() => {
