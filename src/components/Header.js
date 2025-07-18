@@ -67,7 +67,7 @@ function Header() {
                         fontSize: isMobile ? '16px' : '24px',
                     }}
                 >
-                    Luminary Artistry
+                    Luminary Artistree
                 </h1>
 
             </div>

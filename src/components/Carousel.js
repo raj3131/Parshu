@@ -130,7 +130,7 @@ const Carousel = () => {
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>Images</h2>
+            <h2 style={styles.title}>Architectural & Interior Photography</h2>
             {images.length > 0 ? (
                 <div
                     style={styles.carouselWrapper}

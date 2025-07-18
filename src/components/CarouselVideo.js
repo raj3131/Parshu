@@ -131,7 +131,7 @@ const CarouselVideo = () => {
 
     return (
         <div style={styles.container}>
-            <h2 style={styles.title}>Videos</h2>
+            <h2 style={styles.title}>Architectural Videography & Property Ads</h2>
             {vidoes.length > 0 ? (
                 <div
                     style={styles.carouselWrapper}
