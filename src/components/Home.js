@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import stockHeroImg from '../stock images/1-7.jpg';
 
 function Home() {
     const [heroImage, setHeroImage] = useState("");
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
     useEffect(() => {
-        fetch('https://adminparshu.great-site.net/get_hero_image.php')
+        fetch("http://parshulaadmin.xo.je/Admin_LA/get_hero_image.php")
             .then(res => res.json())
             .then(data => {
                 if (data.image) {
-                    setHeroImage('https://adminparshu.great-site.net/' + data.image);
+                    setHeroImage(data.image); // use server image
+                } else {
+                    setHeroImage(stockHeroImg); // fallback if no image in response
                 }
             })
-            .catch(err => console.error('Error fetching hero image:', err));
+            .catch(err => {
+                console.error("Error fetching hero image:", err);
+                setHeroImage(stockHeroImg); // fallback if server is down
+            });
     }, []);
 
     useEffect(() => {
@@ -37,11 +43,20 @@ function Home() {
                 }}
             >
                 {heroImage ? (
-                    <img src={heroImage} alt="Hero" style={styles.heroImage} />
+                    <img
+                        src={heroImage}
+                        alt="Hero"
+                        style={styles.heroImage}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = stockHeroImg; // fallback if image fails to load
+                        }}
+                    />
                 ) : (
-                    <p>No hero image found.</p>
+                    <img src={stockHeroImg} alt="Fallback Hero" style={styles.heroImage} />
                 )}
             </div>
+
             <h2 style={{
                 ...styles.heading,
                 fontSize: isMobile ? '28px' : styles.heading.fontSize
@@ -61,7 +76,6 @@ function Home() {
                 fontSize: isMobile ? '18px' : styles.p.fontSize
             }}>
                 We are a visual content studio dedicated to capturing architecture, interiors, and spaces with precision, depth, and clarity.
-
             </p>
 
             <p style={{
@@ -69,10 +83,10 @@ function Home() {
                 fontSize: isMobile ? '18px' : styles.p.fontSize
             }}>
                 Our team specializes in:
-                  Real Estate Photography & Videography for property listings and developers.
-                 Architectural and Interior Photography for designers and publications.
-                 Drone Photography & Aerial Videography for resorts, villas, and commercial spaces.
-                 Hospitality Content Creation for boutique hotels, stays, and restaurants.
+                Real Estate Photography & Videography for property listings and developers.
+                Architectural and Interior Photography for designers and publications.
+                Drone Photography & Aerial Videography for resorts, villas, and commercial spaces.
+                Hospitality Content Creation for boutique hotels, stays, and restaurants.
             </p>
 
             <p style={{
