@@ -6,7 +6,7 @@ function Home() {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
     useEffect(() => {
-        fetch("http://parshulaadmin.xo.je/Admin_LA/get_hero_image.php")
+        fetch("https://parshulaadmin.xo.je/Admin_LA/get_hero_image.php")
             .then(res => res.json())
             .then(data => {
                 if (data.image) {
